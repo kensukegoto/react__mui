@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core/';
 
 
-export default props => {
+export default ({ muscles }) => {
 
   const [value, setValue] = React.useState(0);
 
@@ -23,9 +23,11 @@ export default props => {
       textColor="primary"
       centered
     >
-      <Tab label="Item One" />
-      <Tab label="Item Two" />
-      <Tab label="Item Three" />
+      <Tab label="ALL" />
+      {muscles.map((group,key) => 
+        <Tab label={group} key={key} />
+      )}
+
     </Tabs>
   </Paper>
  )
