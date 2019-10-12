@@ -38,6 +38,15 @@ export default class extends Component {
 
   }
 
+  handleExerciseCreate = exercise => {
+    this.setState(({exercises})=>({
+      exercises: [
+        ...exercises,
+        exercise
+      ]
+    }))
+  }
+
   render(){
 
     const exercises = this.getExercisesByMuscles(),
@@ -46,6 +55,7 @@ export default class extends Component {
     return <>
       <Header 
         muscles={muscles}
+        onExerciseCreate={this.handleExerciseCreate}
       />
 
       <Exercises 

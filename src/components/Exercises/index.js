@@ -44,7 +44,6 @@ export default ({
               </Typography>
               <List component="nav" aria-label="secondary mailbox folders">
                 {exercises.map(({id,title},key)=>{
-                
                   return <ListItem button key={key}>
                     <ListItemText 
                       primary={title}

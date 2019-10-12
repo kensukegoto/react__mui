@@ -1,4 +1,5 @@
 import React,{Fragment} from "react"
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   Fab,
@@ -32,20 +33,26 @@ export default props =>{
     setOpen(false)
   }
 
-  const ranges = [
-    {
-      value: '0-20',
-      label: '0 to 20',
-    },
-    {
-      value: '21-50',
-      label: '21 to 50',
-    },
-    {
-      value: '51-100',
-      label: '51 to 100',
-    },
-  ];
+  const handleSubmit = () =>{
+    props.onCreate({
+      ...exercise,
+      id: exercise.title.toLocaleLowerCase().replace(/ /g,"-")
+    })
+    setExercise({
+      title: "",
+      description: "",
+      muscles: ""
+    })
+    setOpen(false)
+  }
+
+  const useStyles = makeStyles(theme => ({
+    FormControl: {
+      width: 500
+    }
+  }))
+
+  const classes = useStyles();
 
   return <Fragment>
     <Fab color="default" size="small" onClick={handleClickOpen}>
@@ -63,14 +70,14 @@ export default props =>{
             value={exercise.title}
             onChange={handleChange('title')}
             margin="normal"
-            fullWidth
+            className={classes.FormControl}
           />
           <TextField
             select
             label="Muscles"
             value={exercise.muscles}
             onChange={handleChange('muscles')}
-            fullWidth
+            className={classes.FormControl}
           >
           
             {props.muscles.map((val,key) => (
@@ -86,12 +93,15 @@ export default props =>{
             value={exercise.description}
             onChange={handleChange('description')}
             margin="normal"
-            fullWidth
+            className={classes.FormControl}
           />
         </form>
       </DialogContent>
       <DialogActions>
-        <Button color="primary">
+        <Button 
+          color="primary"
+          onClick={handleSubmit}
+        >
           Create
         </Button>
       </DialogActions>
