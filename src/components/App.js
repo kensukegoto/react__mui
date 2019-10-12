@@ -44,7 +44,9 @@ export default class extends Component {
       { category,exercise } = this.state
 
     return <>
-      <Header />
+      <Header 
+        muscles={muscles}
+      />
 
       <Exercises 
         category={category}
