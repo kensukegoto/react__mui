@@ -7,13 +7,24 @@ import {
 } from '@material-ui/core/';
 
 
-export default ({ muscles }) => {
+export default ({ muscles,category,onSelect }) => {
 
-  const [value, setValue] = React.useState(0);
+  const index = category
+  ? muscles.findIndex(group => group === category) + 1
+  : 0
+
+  const [value, setValue] = React.useState(index);
 
   const handleChange = (event, newValue) => {
+   
+    onSelect(
+      newValue === 0
+      ? ""
+      : muscles[newValue - 1]
+    )
     setValue(newValue);
   };
+
  return (
   <Paper>
     <Tabs

@@ -1,4 +1,4 @@
-import React from "react"
+import React,{Fragment} from "react"
 import {
   Grid,
   Paper,
@@ -19,28 +19,42 @@ const styles = {
   }
 }
 
-export default ({ exercises }) =>
+export default ({ 
+  exercises,
+  category,
+  onSelect,
+  exercise:{
+    id,
+    title = "Welcome!",
+    description = "Please select in exercise from the list on the left"
+  } 
+}) =>
   <Grid container spacing={2}>
     <Grid item sm>
       <Paper style={styles.Paper}>
         {
           exercises.map(([group,exercises],key)=>
-            <Typography
-              variant="h5"
-              style={{textTransform: "capitalize"}}
-              key={key}
-            >
-              {group}
+            !category || category === group
+            ? <Fragment key={key}>
+              <Typography
+                variant="h5"
+                style={{textTransform: "capitalize"}}
+              >
+                {group}
+              </Typography>
               <List component="nav" aria-label="secondary mailbox folders">
-                {exercises.map(({title})=>{
+                {exercises.map(({id,title},key)=>{
                 
-                  return <ListItem button>
-                    <ListItemText primary={title} />
+                  return <ListItem button key={key}>
+                    <ListItemText 
+                      primary={title}
+                      onClick={()=>onSelect(id)}
+                    />
                   </ListItem>
                 })}
-
               </List>
-            </Typography>
+            </Fragment>
+            : null
           )
         }
 
@@ -51,13 +65,13 @@ export default ({ exercises }) =>
         <Typography
           variant="h5"
         >
-          Welcome!
+          {title}
         </Typography>
         <Typography
           variant="body1"
           style={{marginTop:20}}
         >
-          Please select in exercise from the list on the left
+          {description}
         </Typography>
       </Paper>
     </Grid>
