@@ -6,8 +6,10 @@ import {
   List,
   ListItem,
   ListItemText,
+  IconButton,
+  ListItemSecondaryAction
 } from "@material-ui/core"
-
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = {
   Paper: {
@@ -23,6 +25,7 @@ export default ({
   exercises,
   category,
   onSelect,
+  onDelete,
   exercise:{
     id,
     title = "Welcome!",
@@ -49,6 +52,11 @@ export default ({
                       primary={title}
                       onClick={()=>onSelect(id)}
                     />
+                    <ListItemSecondaryAction>
+                      <IconButton onClick={() => onDelete(id)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </ListItemSecondaryAction>
                   </ListItem>
                 })}
               </List>

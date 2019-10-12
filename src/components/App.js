@@ -47,6 +47,12 @@ export default class extends Component {
     }))
   }
 
+  handleExerciseDelete = id => {
+    this.setState(({ exercises }) => ({
+      exercises: exercises.filter(ex => ex.id !== id)
+    }))
+  }
+
   render(){
 
     const exercises = this.getExercisesByMuscles(),
@@ -63,6 +69,7 @@ export default class extends Component {
         exercise={exercise}
         exercises={exercises}
         onSelect={this.handleExerciseSelected}
+        onDelete={this.handleExerciseDelete}
       />
 
       <Footer 
