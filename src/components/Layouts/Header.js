@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
-import CreateDialog from "../Exercises/Dialog"
+import CreateDialog from "../Exercises/Dialogs/Create"
 
 export default ({muscles,onExerciseCreate}) => 
 
