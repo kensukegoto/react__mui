@@ -41,7 +41,8 @@ export default class extends Component {
   // 選択（エクササイズ）
   handleExerciseSelect = id => 
     this.setState(({exercises})=>({
-      exercise: exercises.find(ex => ex.id === id)
+      exercise: exercises.find(ex => ex.id === id),
+      editMode: false
     }))
 
   // 編集
@@ -84,7 +85,9 @@ export default class extends Component {
         onSelect={this.handleExerciseSelect}
         onDelete={this.handleExerciseDelete}
         editMode={editMode}
-        onSelectEdit={this.handleExerciseSelectEdit}
+        onSelectEdit={this.handleExerciseSelectEdit} // 編集ボタンが押された（編集画面を表示）
+        muscles={muscles}
+        onCreate={this.handleExerciseCreate}
       />
 
       <Footer 

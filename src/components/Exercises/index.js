@@ -13,6 +13,7 @@ import {
   Delete as DeleteIcon,
   Edit as EditIcon
 } from '@material-ui/icons';
+import Form from "./Form"
 
 const styles = {
   Paper: {
@@ -35,7 +36,9 @@ export default ({
     id,
     title = "Welcome!",
     description = "Please select in exercise from the list on the left"
-  } 
+  },
+  muscles,
+  onCreate
 }) =>
   <Grid container spacing={2}>
     <Grid item sm>
@@ -79,7 +82,10 @@ export default ({
       <Paper style={styles.Paper}>
         {
           editMode
-          ? <form />
+          ? <Form 
+            muscles={muscles}
+            onCreate={onCreate}
+          />
           : <>
               <Typography
                 variant="h5"
