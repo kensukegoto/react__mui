@@ -29,6 +29,7 @@ export default ({
   category,
   onSelect,
   onDelete,
+  editMode,
   onSelectEdit,
   exercise:{
     id,
@@ -76,17 +77,23 @@ export default ({
     </Grid>
     <Grid item sm>
       <Paper style={styles.Paper}>
-        <Typography
-          variant="h5"
-        >
-          {title}
-        </Typography>
-        <Typography
-          variant="body1"
-          style={{marginTop:20}}
-        >
-          {description}
-        </Typography>
+        {
+          editMode
+          ? <form />
+          : <>
+              <Typography
+                variant="h5"
+              >
+                {title}
+              </Typography>
+              <Typography
+                variant="body1"
+                style={{marginTop:20}}
+              >
+                {description}
+              </Typography>
+          </>
+        }
       </Paper>
     </Grid>
   </Grid>

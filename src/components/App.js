@@ -31,19 +31,24 @@ export default class extends Component {
     )
   }
 
+  // 選択（カテゴリー）
   handleCategorySelect = category => 
     this.setState({
       category
     })
   
+
+  // 選択（エクササイズ）
   handleExerciseSelect = id => 
     this.setState(({exercises})=>({
       exercise: exercises.find(ex => ex.id === id)
     }))
 
+  // 編集
   handleExerciseSelectEdit = id => 
     this.setState(({exercises})=>({
-      exercise: exercises.find(ex => ex.id === id)
+      exercise: exercises.find(ex => ex.id === id),
+      editMode: true
     }))
 
   handleExerciseCreate = exercise => 
@@ -64,7 +69,7 @@ export default class extends Component {
   render(){
 
     const exercises = this.getExercisesByMuscles(),
-      { category,exercise } = this.state
+      { category,exercise,editMode } = this.state
 
     return <>
       <Header 
@@ -78,6 +83,7 @@ export default class extends Component {
         exercises={exercises}
         onSelect={this.handleExerciseSelect}
         onDelete={this.handleExerciseDelete}
+        editMode={editMode}
         onSelectEdit={this.handleExerciseSelectEdit}
       />
 
