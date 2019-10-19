@@ -9,7 +9,13 @@ import {
   IconButton,
   ListItemSecondaryAction
 } from "@material-ui/core"
-import DeleteIcon from '@material-ui/icons/Delete';
+
+import Form from "./Form"
+
+import {
+  Delete as DeleteIcon, 
+  Edit as EditIcon, 
+}from '@material-ui/icons'
 
 const styles = {
   Paper: {
@@ -22,10 +28,14 @@ const styles = {
 }
 
 export default ({ 
+  muscles,
+  editMode,
   exercises,
   category,
   onSelect,
   onDelete,
+  onSelectEdit,
+  onEdit,
   exercise:{
     id,
     title = "Welcome!",
@@ -53,6 +63,9 @@ export default ({
                       onClick={()=>onSelect(id)}
                     />
                     <ListItemSecondaryAction>
+                      <IconButton onClick={() => onSelectEdit(id)}>
+                        <EditIcon />
+                      </IconButton>
                       <IconButton onClick={() => onDelete(id)}>
                         <DeleteIcon />
                       </IconButton>
@@ -69,17 +82,27 @@ export default ({
     </Grid>
     <Grid item sm>
       <Paper style={styles.Paper}>
-        <Typography
-          variant="h5"
-        >
-          {title}
-        </Typography>
-        <Typography
-          variant="body1"
-          style={{marginTop:20}}
-        >
-          {description}
-        </Typography>
+        {
+          editMode 
+          ? <Form 
+              muscles={muscles}
+              onSubmit={onEdit}
+            />
+          : 
+          <Fragment>
+            <Typography
+              variant="h5"
+            >
+              {title}
+            </Typography>
+            <Typography
+              variant="body1"
+              style={{marginTop:20}}
+            >
+              {description}
+            </Typography>
+          </Fragment>
+        }
       </Paper>
     </Grid>
   </Grid>

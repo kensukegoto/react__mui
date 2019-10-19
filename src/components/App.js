@@ -16,6 +16,7 @@ export default class extends Component {
 
   getExercisesByMuscles(){
 
+    // 各カテゴリー（shoulder,chest...）毎にエクササイズを入れるための空の配列を作成
     const initExercises = muscles.reduce((exercises,category)=>({
       ...exercises,
       [category]: []
@@ -24,6 +25,7 @@ export default class extends Component {
     return Object.entries(
       this.state.exercises.reduce((exercises,exercise) => {
         const { muscles } = exercise
+        // 対象の部位のエクササイズの配列を取り出し、さらに新しいエクササイズを追加
         exercises[muscles] = [...exercises[muscles],exercise]
 
         return exercises
@@ -31,37 +33,51 @@ export default class extends Component {
     )
   }
 
-  handleCategorySelected = category => {
+  handleCategorySelected = category => 
     this.setState({
       category
     })
-  }
-  handleExerciseSelected = id => {
+  
+  handleExerciseSelected = id => 
     this.setState(({exercises})=>({
       exercise: exercises.find(ex => ex.id === id)
     }))
 
-  }
+  
 
-  handleExerciseCreate = exercise => {
+  handleExerciseCreate = exercise => 
     this.setState(({exercises})=>({
       exercises: [
         ...exercises,
         exercise
       ]
     }))
-  }
 
-  handleExerciseDelete = id => {
+  handleExerciseDelete = id => 
     this.setState(({ exercises }) => ({
       exercises: exercises.filter(ex => ex.id !== id)
     }))
+  
+
+  handleExerciseSelectEdit = id => 
+    this.setState(({exercises})=>({
+      exercise: exercises.find(ex => ex.id === id),
+      editMode: true
+    }))
+
+  handleExerciseEdit = exercise => {
+    this.setState(({exercises})=>{
+      exercises: [
+        ...exercises.filter(ex => ex.id !== exercise.id),
+        exercise
+      ]
+    })
   }
 
   render(){
 
     const exercises = this.getExercisesByMuscles(),
-      { category,exercise } = this.state
+      { category,exercise,editMode } = this.state
 
     return <>
       <Header 
@@ -70,11 +86,15 @@ export default class extends Component {
       />
 
       <Exercises 
+        editMode={editMode}
         category={category}
         exercise={exercise}
         exercises={exercises}
+        muscles={muscles}
         onSelect={this.handleExerciseSelected}
         onDelete={this.handleExerciseDelete}
+        onSelectEdit={this.handleExerciseSelectEdit}
+        onEdit={this.handleExerciseEdit}
       />
 
       <Footer 
