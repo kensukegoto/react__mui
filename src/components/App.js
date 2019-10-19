@@ -31,12 +31,12 @@ export default class extends Component {
     )
   }
 
-  handleCategorySelected = category => {
+  handleCategorySelect = category => {
     this.setState({
       category
     })
   }
-  handleExerciseSelected = id => {
+  handleExerciseSelect = id => {
     this.setState(({exercises})=>({
       exercise: exercises.find(ex => ex.id === id)
     }))
@@ -73,14 +73,15 @@ export default class extends Component {
         category={category}
         exercise={exercise}
         exercises={exercises}
-        onSelect={this.handleExerciseSelected}
+        onSelect={this.handleExerciseSelect}
         onDelete={this.handleExerciseDelete}
+        onSelectEdit={this.handleExerciseSelectEdit}
       />
 
       <Footer 
         category={category}
         muscles={muscles}
-        onSelect={this.handleCategorySelected}
+        onSelect={this.handleCategorySelect}
       />
     </>
   }

@@ -29,6 +29,7 @@ export default ({
   category,
   onSelect,
   onDelete,
+  onSelectEdit,
   exercise:{
     id,
     title = "Welcome!",
@@ -56,7 +57,7 @@ export default ({
                       onClick={()=>onSelect(id)}
                     />
                     <ListItemSecondaryAction>
-                      <IconButton onClick={() => onDelete(id)}>
+                      <IconButton onClick={() => onSelectEdit(id)}>
                         <EditIcon />
                       </IconButton>
                       <IconButton onClick={() => onDelete(id)}>
