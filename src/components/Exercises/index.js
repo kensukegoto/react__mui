@@ -9,7 +9,10 @@ import {
   IconButton,
   ListItemSecondaryAction
 } from "@material-ui/core"
-import DeleteIcon from '@material-ui/icons/Delete';
+import {
+  Delete as DeleteIcon,
+  Edit as EditIcon
+} from '@material-ui/icons';
 
 const styles = {
   Paper: {
@@ -53,6 +56,9 @@ export default ({
                       onClick={()=>onSelect(id)}
                     />
                     <ListItemSecondaryAction>
+                      <IconButton onClick={() => onDelete(id)}>
+                        <EditIcon />
+                      </IconButton>
                       <IconButton onClick={() => onDelete(id)}>
                         <DeleteIcon />
                       </IconButton>
