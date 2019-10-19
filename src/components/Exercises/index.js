@@ -32,13 +32,14 @@ export default ({
   onDelete,
   editMode,
   onSelectEdit,
-  exercise:{
+  exercise,
+  exercise: {
     id,
     title = "Welcome!",
     description = "Please select in exercise from the list on the left"
   },
   muscles,
-  onCreate
+  onEdit
 }) =>
   <Grid container spacing={2}>
     <Grid item sm>
@@ -83,8 +84,9 @@ export default ({
         {
           editMode
           ? <Form 
+            exercise={exercise}
             muscles={muscles}
-            onCreate={onCreate}
+            onSubmit={onEdit}
           />
           : <>
               <Typography

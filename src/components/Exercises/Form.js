@@ -11,11 +11,16 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default props => {
 
-  const [exercise, setExercise] = React.useState({
-    title: "",
-    description: "",
-    muscles: ""
-  });
+  const [exercise, setExercise] = React.useState(getInitState());
+
+  function getInitState (){
+    const { exercise } = props
+    return exercise ? exercise : {
+      title: "",
+      description: "",
+      muscles: ""
+    }
+  }
 
   const handleChange = name => event => {
     setExercise({ ...exercise, [name]: event.target.value });
@@ -23,9 +28,9 @@ export default props => {
 
   const handleSubmit = () =>{
     // イベント追加
-    props.onCreate({
-      ...exercise,
-      id: exercise.title.toLocaleLowerCase().replace(/ /g,"-")
+    props.onSubmit({
+      ...exercise, // 入力した内容
+      id: exercise.id ? exercise.id : exercise.title.toLocaleLowerCase().replace(/ /g,"-") // IDを作成
     })
     // 追加後はステートを空にする
     setExercise({
@@ -34,7 +39,8 @@ export default props => {
       muscles: ""
     })
     // モーダルは閉じる
-    props.setOpen(false)
+    if(props.setOpen) props.setOpen(false)
+    
   }
 
   const useStyles = makeStyles(theme => ({
@@ -78,6 +84,7 @@ export default props => {
     />
     <br />
     <Button 
+      variant="contained" 
       color="primary"
       onClick={handleSubmit}
     >

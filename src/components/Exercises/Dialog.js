@@ -35,7 +35,7 @@ export default props =>{
         </DialogContentText>
         <Form 
           muscles={muscles}
-          onCreate={onCreate}
+          onSubmit={onCreate}
           setOpen={setOpen}
         />
       </DialogContent>

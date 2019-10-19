@@ -52,6 +52,7 @@ export default class extends Component {
       editMode: true
     }))
 
+  // 作成をクリック
   handleExerciseCreate = exercise => 
     this.setState(({exercises})=>({
       exercises: [
@@ -59,7 +60,15 @@ export default class extends Component {
         exercise
       ]
     }))
-  
+
+  // 更新をクリック
+  handleExerciseEdit = exercise =>
+    this.setState(({exercises})=>({
+      exercises: [
+        ...exercises.filter( ex => ex.id !== exercise.id ),
+        exercise
+      ]
+    }))
 
   handleExerciseDelete = id => 
     this.setState(({ exercises }) => ({
@@ -87,7 +96,7 @@ export default class extends Component {
         editMode={editMode}
         onSelectEdit={this.handleExerciseSelectEdit} // 編集ボタンが押された（編集画面を表示）
         muscles={muscles}
-        onCreate={this.handleExerciseCreate}
+        onEdit={this.handleExerciseEdit}
       />
 
       <Footer 
