@@ -22,15 +22,18 @@ export default props => {
   };
 
   const handleSubmit = () =>{
+    // イベント追加
     props.onCreate({
       ...exercise,
       id: exercise.title.toLocaleLowerCase().replace(/ /g,"-")
     })
+    // 追加後はステートを空にする
     setExercise({
       title: "",
       description: "",
       muscles: ""
     })
+    // モーダルは閉じる
     props.setOpen(false)
   }
 
