@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useEffect} from "react"
 
 import {
   Button,
@@ -21,6 +21,12 @@ export default props => {
       muscles: ""
     }
   }
+
+  useEffect(()=>{
+    console.log("This callback is for name only")
+    setExercise(getInitState())
+  },[props])
+
 
   const handleChange = name => event => {
     setExercise({ ...exercise, [name]: event.target.value });
